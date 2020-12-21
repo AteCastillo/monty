@@ -45,6 +45,6 @@ void push_f(stack_t **stack, unsigned int line_number);
 void atoi_number(char *token2, unsigned int line_number);
 void *add_dnodeint(stack_t **stack, unsigned int line_number);
 int structs(char *token1, stack_t **stack, unsigned int line_number);
-void pall_f(stack_t **stack, unsigned int line_number)
+void pall_f(stack_t **stack, unsigned int line_number);
 
 #endif
