@@ -21,13 +21,13 @@ int main(int argc, char *argv[])
 
     if (argc != 2) 
     {
-        fprintf(stderr, "USAGE: monty file\n", argv[0]);
+        fprintf(stderr, "USAGE: monty file\n");
         exit(EXIT_FAILURE);
     }
     stream = fopen(argv[1], "r");
     if (stream == NULL) 
     {
-       perror("Error: Can't open file" argv[1] "\n");
+       fprintf(stderr, "Error: Can't open file %s\n",argv[1]);
        exit(EXIT_FAILURE);
     }
         

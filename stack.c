@@ -18,7 +18,7 @@ int structs(char *token1, stack_t **stack, unsigned int line_number)
     };
     if (token1 == NULL)
         return (0);
-}
+
     while (op_func[i].opcode != NULL)
     {
         if (strcmp(token1, op_func[i].opcode) == 0)
@@ -41,7 +41,7 @@ int structs(char *token1, stack_t **stack, unsigned int line_number)
 void push_f(stack_t **stack, unsigned int line_number)
 {
     (void) line_number;
-    add_dnodeint(stack, n);
+    add_dnodeint(stack, token2_atoi);
 }
 
 /**
@@ -52,12 +52,14 @@ void push_f(stack_t **stack, unsigned int line_number)
  */
 void atoi_number(char *token2, unsigned int linecheck)
 {
-    int token2_atoi = 0;
+    unsigned int i;
 
-    if (token2 == NULL || token2 < 48 || token2 > 57)
-        printf("L%d: usage: push integer", linecheck);
-        exit(EXIT_FAILURE);
-    token2_atoi = atoi(token2);
+    if (token2 != NULL)
+        for (i = 0; token2[i] != 0; i++)
+            if (token2[i] < 48 || token2[i] > 57)
+                printf("L%d: usage: push integer", linecheck);
+                exit(EXIT_FAILURE);
+        token2_atoi = atoi(token2);
 }
 
 /**
@@ -68,25 +70,26 @@ void atoi_number(char *token2, unsigned int linecheck)
  */
 
 void pall_f(stack_t **stack, unsigned int line_number)
+{
     stack_t *h = NULL;
 
     (void) line_number;
 /* function taken from task 0 of 0x17-doubly_linked_lists project*/
 	if (stack == NULL)
 	{
-		free_stack(*stack);
+		/*free(*stack);*/
 		exit(EXIT_FAILURE);
 	}
 	h = *stack;
 	if (h == NULL)
-		return (0);
+		return;
 	while (h)
 	{
 		printf("%d\n", h->n);
-		count++;
 		h = h->next;
 	}
 	return;
+}
 
 /**
  * add_dnodeint - to add node at the beginning
@@ -106,21 +109,19 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number)
     {   
         printf("Error: malloc failed");
 		exit(EXIT_FAILURE);
-
+    }
 	if (*stack == NULL)
 	{
 		newnode->n = token2_atoi;
 		newnode->prev = NULL;
 		newnode->next = NULL;
 		*stack = newnode;
-		return;
-	}
-
-	tmp = *stack;
-	newnode->n = token2_atoi;
-	newnode->prev = NULL;
-	newnode->next = tmp;
-	tmp->prev = newnode;
-	*stack = newnode;
-	return;
+ 	}
+    tmp = *stack;
+    newnode->n = token2_atoi;
+    newnode->prev = NULL;
+    newnode->next = tmp;
+    tmp->prev = newnode;
+    *stack = newnode; 
+    return(newnode);
 }
