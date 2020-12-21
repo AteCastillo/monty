@@ -4,16 +4,16 @@
  * structs - to generate an array of structs
  * @token1: pointer received to the first token of the line
  * @stack: doble pointer from struct
- * @linecheck: int to know the number of every line
+ * @line_number: int to know the number of every line from the struct
  * Return: an int
  */
 
-int structs(char *token1, stack_t **stack, unsigned int linecheck)
+int structs(char *token1, stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 	instruction_t op_func[] = {
-    	{"push", push_f},
-        {"pall", pall_f},
+		{"push", push_f},
+		{"pall", pall_f},
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
@@ -22,16 +22,14 @@ int structs(char *token1, stack_t **stack, unsigned int linecheck)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
 		{
-            
-			op_func[i].f(stack, linecheck);
-			return (1);
+			op_func[i].f(stack, line_number);
+			return (0);
 		}
 		i++;
 	}
-    fprintf(stderr,"L%u: unknown instruction %s\n",linecheck, token1);
-	frees(*stack);
-    exit(EXIT_FAILURE);
+	return (1);
 }
+
 /**
  * push_f - to push the lines contained in a file
  * @stack: doble pointer from struct
@@ -54,23 +52,13 @@ void push_f(stack_t **stack, unsigned int line_number)
 void atoi_number(char *token2, unsigned int linecheck)
 {
 	unsigned int i;
- 	if (token2 != NULL)
+
+	if (token2 != NULL)
 		for (i = 0; token2[i] != 0; i++)
 			if (token2[i] < 48 || token2[i] > 57)
-            {
-				fprintf(stderr,"L%d: usage: push integer2", linecheck);
+				printf("L%d: usage: push integer", linecheck);
 				exit(EXIT_FAILURE);
-            }
-            else
-            {
-		        token2_atoi = atoi(token2);
-                return;
-            }
-    else
-    {
-        fprintf(stderr,"L%d: usage: push integer1", linecheck);
-		exit(EXIT_FAILURE);
-    }
+		token2_atoi = atoi(token2);
 }
 
 /**
@@ -82,23 +70,23 @@ void atoi_number(char *token2, unsigned int linecheck)
 
 void pall_f(stack_t **stack, unsigned int line_number)
 {
-	stack_t *h = *stack;
+	stack_t *h = NULL;
 
 	(void) line_number;
 /* function taken from task 0 of 0x17-doubly_linked_lists project*/
 	if (stack == NULL)
 	{
-		frees(*stack);
+		/*free(*stack);*/
 		exit(EXIT_FAILURE);
 	}
+	h = *stack;
 	if (h == NULL)
 		return;
 	while (h)
 	{
 		printf("%d\n", h->n);
 		h = h->next;
-    }
-    return;
+	}
 }
 
 /**
@@ -111,24 +99,27 @@ void pall_f(stack_t **stack, unsigned int line_number)
 void *add_dnodeint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newnode = malloc(sizeof(stack_t));
-	/*stack_t *tmp = *stack;*/
+	stack_t *tmp = *stack;
 
 	(void) line_number;
+
 	if (newnode == NULL)
 	{
-		frees(*stack);
-        exit(EXIT_FAILURE);
+		printf("Error: malloc failed");
+		exit(EXIT_FAILURE);
 	}
-	if (stack == NULL)
+	if (*stack == NULL)
 	{
-		frees(*stack);
-        exit(EXIT_FAILURE);
+		newnode->n = token2_atoi;
+		newnode->prev = NULL;
+		newnode->next = NULL;
+		*stack = newnode;
 	}
-    newnode->n = token2_atoi;
-    newnode->next = *stack;
+	tmp = *stack;
+	newnode->n = token2_atoi;
 	newnode->prev = NULL;
-    if (*stack != NULL)
-		(*stack)->prev = newnode;
+	newnode->next = tmp;
+	tmp->prev = newnode;
 	*stack = newnode;
-	return(newnode);
+	return (newnode);
 }
