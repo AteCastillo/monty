@@ -33,21 +33,25 @@ int main(int argc, char *argv[])
 	{
 		token1 = strtok(buffer, TOKEN_DELIMITER);
 		token2 = strtok(NULL, TOKEN_DELIMITER);
-        if (strcmp(token1, "push") == 0)
-        {
-            atoi_number(token2, linecheck); 
-        }     /* once token2 exists convert it to int*/
-        if (token1 && token1[0] != '#')
-            structs(token1, &head, linecheck); /* after token1, push it */
+		if (strcmp(token1, "push") == 0)
+		{
+			atoi_number(token2, linecheck);
+		} /* once token2 exists convert it to int*/
+		if (token1 && token1[0] != '#')
+			structs(token1, &head, linecheck); /* after token1, push it */
 		linecheck++;
 	}
 
 	free(buffer);
-    frees(head);
+	frees(head);
 	fclose(stream);
 	exit(EXIT_SUCCESS);
 }
-
+/**
+ * frees - to free the stack
+ * @head: pointer 
+ * Return: none
+ */
 void frees(stack_t *head)
 {
 	stack_t *tmp;

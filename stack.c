@@ -5,15 +5,15 @@
  * @token1: pointer received to the first token of the line
  * @stack: doble pointer from struct
  * @linecheck: int to know the number of every line
- * Return: an int
+ * Return: none
  */
 
 int structs(char *token1, stack_t **stack, unsigned int linecheck)
 {
 	int i = 0;
 	instruction_t op_func[] = {
-    	{"push", push_f},
-        {"pall", pall_f},
+		{"push", push_f},
+		{"pall", pall_f},
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
@@ -22,16 +22,16 @@ int structs(char *token1, stack_t **stack, unsigned int linecheck)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
 		{
-            
 			op_func[i].f(stack, linecheck);
 			return (1);
 		}
 		i++;
 	}
-    fprintf(stderr,"L%u: unknown instruction %s\n",linecheck, token1);
+	fprintf(stderr, "L%u: unknown instruction %s\n", linecheck, token1);
 	frees(*stack);
-    exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
+
 /**
  * push_f - to push the lines contained in a file
  * @stack: doble pointer from struct
@@ -54,23 +54,24 @@ void push_f(stack_t **stack, unsigned int line_number)
 void atoi_number(char *token2, unsigned int linecheck)
 {
 	unsigned int i;
- 	if (token2 != NULL)
+
+	if (token2 != NULL)
 		for (i = 0; token2[i] != 0; i++)
 			if (token2[i] < 48 || token2[i] > 57)
-            {
-				fprintf(stderr,"L%d: usage: push integer2", linecheck);
+			{
+				fprintf(stderr, "L%d: usage: push integer", linecheck);
 				exit(EXIT_FAILURE);
-            }
-            else
-            {
-		        token2_atoi = atoi(token2);
-                return;
-            }
-    else
-    {
-        fprintf(stderr,"L%d: usage: push integer1", linecheck);
+			}
+			else
+			{
+				token2_atoi = atoi(token2);
+				return;
+			}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer", linecheck);
 		exit(EXIT_FAILURE);
-    }
+	}
 }
 
 /**
@@ -97,8 +98,8 @@ void pall_f(stack_t **stack, unsigned int line_number)
 	{
 		printf("%d\n", h->n);
 		h = h->next;
-    }
-    return;
+	}
+	return;
 }
 
 /**
@@ -117,18 +118,18 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number)
 	if (newnode == NULL)
 	{
 		frees(*stack);
-        exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	if (stack == NULL)
 	{
 		frees(*stack);
-        exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-    newnode->n = token2_atoi;
-    newnode->next = *stack;
+	newnode->n = token2_atoi;
+	newnode->next = *stack;
 	newnode->prev = NULL;
-    if (*stack != NULL)
+	if (*stack != NULL)
 		(*stack)->prev = newnode;
 	*stack = newnode;
-	return(newnode);
+	return (newnode);
 }
