@@ -1,12 +1,7 @@
 #include "monty.h"
 #define TOKEN_DELIMITER " \t\n\r"
 int token2_atoi = 0;
-/**
- * main - tokenize and executing all functions
- * @argc: counter of arguments
- * @argv: arguments received from the prompt
- * Return: nothing
- */
+
 int main(int argc, char *argv[])
 {
 	FILE *stream;
@@ -46,11 +41,7 @@ int main(int argc, char *argv[])
 	fclose(stream);
 	exit(EXIT_SUCCESS);
 }
-/**
- * frees - to free the stack
- * @head: pointer 
- * Return: none
- */
+
 void frees(stack_t *head)
 {
 	stack_t *tmp;

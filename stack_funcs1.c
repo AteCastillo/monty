@@ -12,10 +12,10 @@ int structs(char *token1, stack_t **head, unsigned int linecheck)
 {
 	int i = 0;
 	instruction_t op_func[] = {
-		{"push", push_f},
-		{"pall", pall_f},
-        {"pint", pint_f},
-        {"pop", pop_f},
+		{"push", push_f}, {"swap", swap_f}, {"mul", mul_f},
+		{"pall", pall_f}, {"add", add_f}, {"mod", mod_f},
+        {"pint", pint_f}, {"sub", sub_f},
+        {"pop", pop_f}, {"div", div_f},
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
@@ -61,7 +61,7 @@ void atoi_number(char *token2, unsigned int linecheck)
 		for (i = 0; token2[i] != 0; i++)
 			if (token2[i] < 48 || token2[i] > 57)
 			{
-				fprintf(stderr, "L%d: usage: push integer", linecheck);
+				fprintf(stderr, "L%d: usage: push integer\n", linecheck);
 				exit(EXIT_FAILURE);
 			}
 			else
@@ -71,7 +71,7 @@ void atoi_number(char *token2, unsigned int linecheck)
 			}
 	else
 	{
-		fprintf(stderr, "L%d: usage: push integer", linecheck);
+		fprintf(stderr, "L%d: usage: push integer\n", linecheck);
 		exit(EXIT_FAILURE);
 	}
 }
