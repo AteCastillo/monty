@@ -7,7 +7,7 @@
  * @linecheck: to check the number of the line
  * Return: an int
  **/
-int array_struc(char *token1, stack_t **head, unsigned int linecheck)
+void array_struc(char *token1, stack_t **head, unsigned int linecheck)
 {
 	int i = 0;
 	instruction_t op_func[] = {
@@ -18,13 +18,15 @@ int array_struc(char *token1, stack_t **head, unsigned int linecheck)
 		{NULL, NULL}
 	};
 	if (token1 == NULL)
-		return (0);
+		return;
+	if (token1[0] == '#')
+		return;
 	while (op_func[i].opcode != NULL)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
 		{
 			op_func[i].f(head, linecheck);
-			return (0);
+			return;
 		}
 		i++;
 	}
