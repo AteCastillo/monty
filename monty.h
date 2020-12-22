@@ -49,5 +49,7 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number);
 int structs(char *token1, stack_t **stack, unsigned int line_number);
 void pall_f(stack_t **stack, unsigned int line_number);
 void frees(stack_t *head);
+void pint_f(stack_t **stack, unsigned int line_number);
+void pop_f(stack_t **stack, unsigned int line_number);
 
 #endif

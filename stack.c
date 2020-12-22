@@ -14,6 +14,7 @@ int structs(char *token1, stack_t **head, unsigned int linecheck)
 	instruction_t op_func[] = {
 		{"push", push_f},
 		{"pall", pall_f},
+        {"pint", pint_f},
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
