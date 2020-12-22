@@ -60,7 +60,7 @@ void atoi_number(char *token2, unsigned int linecheck)
 	{
 		for (i = 0; token2[i] != 0; i++)
 		{
-			if (token2[i] < 48 || token2[i] > 57)
+			if ((token2[i] < 48 && token2[i] != 45) || token2[i] > 57)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", linecheck);
 				exit(EXIT_FAILURE);
