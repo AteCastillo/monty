@@ -50,7 +50,7 @@ void frees(stack_t *head)
 	stack_t *tmp;
 
 	if (head == NULL)
-		exit(EXIT_FAILURE);
+		return;
 	while (head->prev)
 	{
 		head = head->prev;
