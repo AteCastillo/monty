@@ -55,6 +55,7 @@ void atoi_number(char *token2, unsigned int linecheck)
 	unsigned int i;
 
 	if (token2 != NULL)
+	{
 		for (i = 0; token2[i] != 0; i++)
 		{
 			if (token2[i] < 48 || token2[i] > 57)
@@ -68,10 +69,11 @@ void atoi_number(char *token2, unsigned int linecheck)
 			}
 		}
 		return;
+	}
 	else
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", linecheck);
-		exit(EXIT_FAILURE);
+	fprintf(stderr, "L%d: usage: push integer\n", linecheck);
+	exit(EXIT_FAILURE);
 	}
 }
 
