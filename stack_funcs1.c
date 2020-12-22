@@ -95,7 +95,7 @@ void pall_f(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	if (h == NULL)
-		exit(EXIT_FAILURE);
+		return;
 	while (h)
 	{
 		printf("%d\n", h->n);
