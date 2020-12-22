@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 	FILE *stream;
 	size_t len = 0;
 	ssize_t get_line;
-	char *token1 = NULL, *token2 = NULL, char *buffer = NULL;
+	char *token1 = NULL, *token2 = NULL, *buffer = NULL;
 	stack_t *head = NULL;
 	unsigned int linecheck = 1;
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 			buffer++;
 		if (buffer[0] == '\n' || buffer[0] == '\0')
 		{
-			linecheck++, continue;
+			linecheck++; continue;
 		}
 		token1 = strtok(buffer, TOKEN_DELIMITER);
 		token2 = strtok(NULL, TOKEN_DELIMITER);
