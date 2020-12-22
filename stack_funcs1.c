@@ -19,7 +19,7 @@ int structs(char *token1, stack_t **head, unsigned int linecheck)
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
-		return(0);
+		exit(EXIT_FAILURE);
 	while (op_func[i].opcode != NULL)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
@@ -67,7 +67,7 @@ void atoi_number(char *token2, unsigned int linecheck)
 			else
 			{
 				token2_atoi = atoi(token2);
-				/*return;*/
+				return;
 			}
 	else
 	{
