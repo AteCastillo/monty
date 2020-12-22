@@ -1,31 +1,30 @@
 #include "monty.h"
 
 /**
- * structs - to generate an array of structs
- * @token1: pointer received to the first token of the line
- * @stack: doble pointer from struct
- * @linecheck: int to know the number of every line
- * Return: none
- */
-
-int structs(char *token1, stack_t **head, unsigned int linecheck)
+ * array_struc - array of structs to compare
+ * @token1: the first element in the buffer
+ * @head: pointer
+ * @linecheck: to check the number of the line
+ * Return: an int
+ **/
+int array_struc(char *token1, stack_t **head, unsigned int linecheck)
 {
 	int i = 0;
 	instruction_t op_func[] = {
 		{"push", push_f}, {"swap", swap_f}, {"mul", mul_f},
 		{"pall", pall_f}, {"add", add_f}, {"mod", mod_f},
-        {"pint", pint_f}, {"sub", sub_f},
-        {"pop", pop_f}, {"div", div_f},
+		{"pint", pint_f}, {"sub", sub_f},
+		{"pop", pop_f}, {"div", div_f},
 		{NULL, NULL}
-		};
+	};
 	if (token1 == NULL)
-		return(0);
+		return (0);
 	while (op_func[i].opcode != NULL)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
 		{
 			op_func[i].f(head, linecheck);
-			return(0);
+			return (0);
 		}
 		i++;
 	}
@@ -35,12 +34,10 @@ int structs(char *token1, stack_t **head, unsigned int linecheck)
 }
 
 /**
- * push_f - to push the lines contained in a file
- * @stack: doble pointer from struct
- * @line_number: int to know the number of line from struct
- * Return: nothing
- */
-
+ * push_f - to push elements to the stack
+ * @stack: from struct
+ * @line_number: to checl the number of the line
+ **/
 void push_f(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
@@ -48,17 +45,18 @@ void push_f(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * atoi_number - to convert a char into atoi
- * @token2: second token of the line
- * @linecheck: int to know the number of line
- * Return: nothing
- */
+ * atoi_number - to convert chars into ints
+ * @token2: second element
+ * @linecheck: to check the number of the line
+ **/
+
 void atoi_number(char *token2, unsigned int linecheck)
 {
 	unsigned int i;
 
 	if (token2 != NULL)
 		for (i = 0; token2[i] != 0; i++)
+		{
 			if (token2[i] < 48 || token2[i] > 57)
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", linecheck);
@@ -67,8 +65,9 @@ void atoi_number(char *token2, unsigned int linecheck)
 			else
 			{
 				token2_atoi = atoi(token2);
-				return;
 			}
+		}
+		return;
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", linecheck);
@@ -77,12 +76,10 @@ void atoi_number(char *token2, unsigned int linecheck)
 }
 
 /**
- * pall_f - to print the values in the stack
- * @stack: doble pointer from struct
- * @line_number: int to know the number of line from struct
- * Return: nothing
- */
-
+ * pall_f - to print every element with push
+ * @stack: from struct
+ * @line_number: to checl the number of the line
+ **/
 void pall_f(stack_t **stack, unsigned int line_number)
 {
 	stack_t *h = *stack;
@@ -104,27 +101,25 @@ void pall_f(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * add_dnodeint - to add node at the beginning
- * @stack: doble pointer from struct
- * @line_number: int to know the number of line from struct
- * Return: int.
- */
-
+ * add_dnodeint - to add node at the begginig
+ * @stack: from struct
+ * @line_number: to checl the number of the line
+ * Return: pointer
+ **/
 void *add_dnodeint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newnode = malloc(sizeof(stack_t));
 	/*stack_t *tmp = *stack;*/
 
 	(void) line_number;
-	
 	if (stack == NULL)
 	{
 		frees(*stack);
 		exit(EXIT_FAILURE);
 	}
-    if (newnode == NULL)
+	if (newnode == NULL)
 	{
-        fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		frees(*stack);
 		exit(EXIT_FAILURE);
 	}
@@ -136,5 +131,3 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number)
 	*stack = newnode;
 	return (newnode);
 }
-
-/*if ( < 65 || > 90 || < 97 > 122)*/

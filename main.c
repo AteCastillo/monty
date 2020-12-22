@@ -2,6 +2,12 @@
 #define TOKEN_DELIMITER " \t\n\r"
 int token2_atoi = 0;
 
+/**
+ * main - Entry point
+ * @argc: to count arguments received
+ * @argv: each argument
+ * Return: Always 0 (Success)
+ */
 int main(int argc, char *argv[])
 {
 	FILE *stream;
@@ -22,13 +28,14 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while ((get_line = getline(&buffer, &len, stream)) != -1)
+	while ((get_line = getline(&buffer, &len, stream)) != EOF)
 	{
-        while (buffer[0] == 32 || buffer[0] == 9)
+		while (buffer[0] == 32 || buffer[0] == 9)
 			buffer++;
 		if (buffer[0] == '\n' || buffer[0] == '\0')
 		{
-			linecheck++; continue;
+			linecheck++;
+			continue;
 		}
 		token1 = strtok(buffer, TOKEN_DELIMITER);
 		token2 = strtok(NULL, TOKEN_DELIMITER);
@@ -37,14 +44,18 @@ int main(int argc, char *argv[])
 			atoi_number(token2, linecheck);
 		} /* once token2 exists convert it to int*/
 		if (token1 && token1[0] != '#')
-			structs(token1, &head, linecheck); /* after token1, push it */
+			array_struc(token1, &head, linecheck);
 		linecheck++;
 	}
-	free(buffer);
-	frees(head);
+	free(buffer), frees(head);
 	fclose(stream);
 	exit(EXIT_SUCCESS);
 }
+/**
+ * frees - To free the stack
+ * @head: pointer to the stack
+ * Return: nothing
+ */
 void frees(stack_t *head)
 {
 	stack_t *tmp;
