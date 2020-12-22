@@ -70,6 +70,6 @@ void add_f(stack_t **stack, unsigned int line_number)
 
 void nop_f(stack_t **stack, unsigned int line_number)
 {
-    (void)stack;
-    (void)line_number;
+    (void) stack;
+    (void) line_number;
 }

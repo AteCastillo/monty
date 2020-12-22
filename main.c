@@ -5,11 +5,9 @@ int token2_atoi = 0;
 int main(int argc, char *argv[])
 {
 	FILE *stream;
-	char *buffer = NULL;
 	size_t len = 0;
 	ssize_t get_line;
-	char *token1 = NULL;
-	char *token2 = NULL;
+	char *token1 = NULL, *token2 = NULL, char *buffer = NULL;
 	stack_t *head = NULL;
 	unsigned int linecheck = 1;
 
@@ -26,6 +24,12 @@ int main(int argc, char *argv[])
 	}
 	while ((get_line = getline(&buffer, &len, stream)) != -1)
 	{
+        while (buffer[0] == 32 || buffer[0] == 9)
+			buffer++;
+		if (buffer[0] == '\n' || buffer[0] == '\0')
+		{
+			linecheck++, continue;
+		}
 		token1 = strtok(buffer, TOKEN_DELIMITER);
 		token2 = strtok(NULL, TOKEN_DELIMITER);
 		if (strcmp(token1, "push") == 0)
@@ -41,7 +45,6 @@ int main(int argc, char *argv[])
 	fclose(stream);
 	exit(EXIT_SUCCESS);
 }
-
 void frees(stack_t *head)
 {
 	stack_t *tmp;

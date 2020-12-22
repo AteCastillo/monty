@@ -137,3 +137,5 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number)
 	*stack = newnode;
 	return (newnode);
 }
+
+/*if ( < 65 || > 90 || < 97 > 122)*/
