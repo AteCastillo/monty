@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
 			structs(token1, &head, linecheck); /* after token1, push it */
 		linecheck++;
 	}
-
 	free(buffer);
 	frees(head);
 	fclose(stream);
@@ -56,11 +55,17 @@ void frees(stack_t *head)
 {
 	stack_t *tmp;
 
-	while (head != NULL)
+	if (head == NULL)
+		return;
+	while (head->prev)
+	{
+		head = head->prev;
+	}
+
+	while (head)
 	{
 		tmp = head;
 		head = head->next;
 		free(tmp);
 	}
-	free(head);
 }

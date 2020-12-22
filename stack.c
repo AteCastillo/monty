@@ -8,7 +8,7 @@
  * Return: none
  */
 
-int structs(char *token1, stack_t **stack, unsigned int linecheck)
+int structs(char *token1, stack_t **head, unsigned int linecheck)
 {
 	int i = 0;
 	instruction_t op_func[] = {
@@ -22,13 +22,13 @@ int structs(char *token1, stack_t **stack, unsigned int linecheck)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
 		{
-			op_func[i].f(stack, linecheck);
-			return (1);
+			op_func[i].f(head, linecheck);
+			return (0);
 		}
 		i++;
 	}
 	fprintf(stderr, "L%u: unknown instruction %s\n", linecheck, token1);
-	frees(*stack);
+	frees(*head);
 	exit(EXIT_FAILURE);
 }
 
@@ -115,13 +115,15 @@ void *add_dnodeint(stack_t **stack, unsigned int line_number)
 	/*stack_t *tmp = *stack;*/
 
 	(void) line_number;
-	if (newnode == NULL)
+	
+	if (stack == NULL)
 	{
 		frees(*stack);
 		exit(EXIT_FAILURE);
 	}
-	if (stack == NULL)
+    if (newnode == NULL)
 	{
+        fprintf(stderr, "Error: malloc failed\n");
 		frees(*stack);
 		exit(EXIT_FAILURE);
 	}
