@@ -40,14 +40,13 @@ int main(int argc, char *argv[])
 		token1 = strtok(buffer, TOKEN_DELIMITER);
 		token2 = strtok(NULL, TOKEN_DELIMITER);
 		if (strcmp(token1, "push") == 0)
-		{
 			atoi_number(token2, linecheck);
-		} /* once token2 exists convert it to int*/
-		if (token1 && token1[0] != '#')
-			array_struc(token1, &head, linecheck);
+		/* once token2 exists convert it to int*/
+		array_struc(token1, &head, linecheck);
 		linecheck++;
 	}
-	free(buffer), frees(head);
+	free(buffer);
+	frees(head);
 	fclose(stream);
 	exit(EXIT_SUCCESS);
 }
