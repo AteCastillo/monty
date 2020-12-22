@@ -19,7 +19,7 @@ int structs(char *token1, stack_t **head, unsigned int linecheck)
 		{NULL, NULL}
 		};
 	if (token1 == NULL)
-		exit(EXIT_FAILURE);
+		return(0);
 	while (op_func[i].opcode != NULL)
 	{
 		if (strcmp(token1, op_func[i].opcode) == 0)
