@@ -9,7 +9,7 @@ void sub_f(stack_t **stack, unsigned int line_number)
 {
 	stack_t *aux = *stack;
 
-	if ((*stack)->next == NULL)
+	if ((*stack)->next == NULL || stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		frees(*stack);
@@ -30,7 +30,7 @@ void div_f(stack_t **stack, unsigned int line_number)
 {
 	stack_t *aux = *stack;
 
-	if ((*stack)->next == NULL)
+	if ((*stack)->next == NULL || stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
 		frees(*stack);
@@ -57,7 +57,7 @@ void mul_f(stack_t **stack, unsigned int line_number)
 {
 	stack_t *aux = *stack;
 
-	if ((*stack)->next == NULL)
+	if ((*stack)->next == NULL || stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 		frees(*stack);
@@ -78,7 +78,7 @@ void mod_f(stack_t **stack, unsigned int line_number)
 {
 	stack_t *aux = *stack;
 
-	if ((*stack)->next == NULL)
+	if ((*stack)->next == NULL || stack == NULL || *stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 		frees(*stack);
