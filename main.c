@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		array_struc(token1, &head, linecheck);
 		linecheck++;
 	}
-	for(; count > 0; count--, buffer--);
+	for (; count > 0; count--, buffer--);
 	free(buffer);
 	frees(head);
 	fclose(stream);
