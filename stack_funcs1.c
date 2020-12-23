@@ -13,7 +13,7 @@ void array_struc(char *token1, stack_t **head, unsigned int linecheck)
 	instruction_t op_func[] = {
 		{"push", push_f}, {"swap", swap_f}, {"mul", mul_f},
 		{"pall", pall_f}, {"add", add_f}, {"mod", mod_f},
-		{"pint", pint_f}, {"sub", sub_f},
+		{"pint", pint_f}, {"sub", sub_f}, {"nop", nop_f},
 		{"pop", pop_f}, {"div", div_f},
 		{NULL, NULL}
 	};
