@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	ssize_t get_line;
 	char *token1 = NULL, *token2 = NULL, *buffer = NULL;
 	stack_t *head = NULL;
-	unsigned int linecheck = 1;
+	unsigned int linecheck = 1, count = 0;
 
 	if (argc != 2)
 	{
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	while ((get_line = getline(&buffer, &len, stream)) != EOF)
 	{
 		while (buffer[0] == 32 || buffer[0] == 9)
-			buffer++;
+		        buffer++, count++;
 		if (buffer[0] == '\n' || buffer[0] == '\0')
 		{
 			linecheck++;
@@ -41,10 +41,10 @@ int main(int argc, char *argv[])
 		token2 = strtok(NULL, TOKEN_DELIMITER);
 		if (strcmp(token1, "push") == 0)
 			atoi_number(token2, linecheck);
-		/* once token2 exists convert it to int*/
 		array_struc(token1, &head, linecheck);
 		linecheck++;
 	}
+	for(; count > 0; count--, buffer--);
 	free(buffer);
 	frees(head);
 	fclose(stream);
